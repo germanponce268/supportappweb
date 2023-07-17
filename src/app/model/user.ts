@@ -3,7 +3,7 @@ export class User {
     userId : string;
     firstName : string;
     lastname : string;
-    username : string;
+    username:string;
     email : string;
     loginDateDisplay! : Date;
     joinDate! : string;
