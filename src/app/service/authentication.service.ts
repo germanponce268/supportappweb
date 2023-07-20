@@ -12,15 +12,15 @@ export class AuthenticationService {
   public host = environment.apiUrl;
   private token!: string | null;
   private loggedInUsername!:string | null;
-  private jwtHelper! : JwtHelperService;
+  private jwtHelper : JwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient) {}
 
   login(user: User) : Observable<HttpResponse<any>>{
     return this.http.post<HttpResponse<User>| HttpErrorResponse>(`${this.host}/user/login`, user, {observe : 'response'});
   }
-  register(user: User) : Observable<HttpResponse<any> | HttpErrorResponse>{
-    return this.http.post<HttpResponse<any> | HttpErrorResponse>(`${this.host}/user/register`, user)
+  register(user: User) : Observable<User>{
+    return this.http.post<User>(`${this.host}/user/register`, user)
   }
   //remover los items del local storage
   logout(): void{
@@ -49,13 +49,15 @@ export class AuthenticationService {
   }
   //obteenr token del local storage
   loadToken(): void{
-    this.token = localStorage.getItem('token');
+    if(localStorage.getItem('token')!=null)
+     this.token = localStorage.getItem('token');
   }
 
-  getToken(): string{
-    return this.token || 'No hay Token';
+  getToken(): string | null{
+    console.log(this.token, 'El token');
+    return this.token;
   }
-  //checkear a traves del token si el usuario esta logueadojmkn  
+  //checkear a traves del token si el usuario esta logueado
   isLoggedIn(): boolean | null{
     this.loadToken();
     if(this.token != null && this.token !== ''){

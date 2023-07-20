@@ -13,7 +13,7 @@ export class UserService {
   private host = environment.apiUrl;
   constructor(private http : HttpClient) { }
 
-  getUsers(): Observable<User[] | HttpErrorResponse>{
+  getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.host}/user/list`);
   }
   addUSer(formData : FormData): Observable<User>{
