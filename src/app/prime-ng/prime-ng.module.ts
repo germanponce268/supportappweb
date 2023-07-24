@@ -6,7 +6,9 @@ import {TableModule} from 'primeng/table';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ToolbarModule} from 'primeng/toolbar';
-
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { DialogModule } from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
 @NgModule({
     declarations:[],
     imports: [
@@ -16,7 +18,10 @@ import {ToolbarModule} from 'primeng/toolbar';
         TableModule,
         ContextMenuModule,
         ToolbarModule,
-        FileUploadModule
+        FileUploadModule,
+        DynamicDialogModule,
+        DialogModule,
+        DropdownModule
     ],
     exports: [
         InputTextModule,
@@ -25,7 +30,10 @@ import {ToolbarModule} from 'primeng/toolbar';
         TableModule,
         ContextMenuModule,
         ToolbarModule,
-        FileUploadModule
+        FileUploadModule,
+        DynamicDialogModule,
+        DialogModule,
+        DropdownModule 
     ]
 
 })

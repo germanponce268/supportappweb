@@ -2,7 +2,7 @@ export class User {
     id!: number;
     userId : string;
     firstName : string;
-    lastname : string;
+    lastName : string;
     username:string;
     email : string;
     loginDateDisplay! : Date;
@@ -16,7 +16,7 @@ export class User {
     constructor(){
         this.userId = '';
         this.firstName = '';
-        this.lastname = '';
+        this.lastName = '';
         this.username = '';
         this.email = '';
         this.active = false;

@@ -8,6 +8,7 @@ import { UserComponent } from "./user/user.component";
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
         LoginComponent,
         RegisterComponent,
         UserComponent,
-        MenuBarComponent
+        MenuBarComponent,
+        ProfileComponent
         ],
     imports:[
         PrimeNgModule,

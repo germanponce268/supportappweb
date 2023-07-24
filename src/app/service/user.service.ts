@@ -10,13 +10,14 @@ import { CustomHttpResponse } from '../model/custom-http-response';
   providedIn: 'root'
 })
 export class UserService {
+  public user! : User;
   private host = environment.apiUrl;
   constructor(private http : HttpClient) { }
 
   getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.host}/user/list`);
   }
-  addUSer(formData : FormData): Observable<User>{
+  addUser(formData : FormData): Observable<User>{
     return this.http.post<User>(`${this.host}/user/add`, formData);
   }
   
@@ -49,15 +50,15 @@ export class UserService {
       return null;
   }
 
-  createUserFromData(loggedInUsername : string , user : User, profileImage: File): FormData {
+  createUserFromData(loggedInUsername : string | null, user : User, profileImage: File | null): FormData {
     const formData = new FormData();
-    formData.append('currentUSername', loggedInUsername);
+    formData.append('currentUSername', loggedInUsername!);
     formData.append('firstName', user.firstName);
-    formData.append('lastName', user.lastname);
+    formData.append('lastName', user.lastName);
     formData.append('username', user.username);
     formData.append('email', user.email);
     formData.append('role', user.role);
-    formData.append('profileImage',profileImage);
+    formData.append('profileImage',profileImage!);
     formData.append('isActive', JSON.stringify(user.active));
     formData.append('isNonLocked', JSON.stringify(user.notLocked));
     return formData;
