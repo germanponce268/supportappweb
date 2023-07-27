@@ -31,7 +31,8 @@ import { ProfileComponent } from './profile/profile.component';
         LoginComponent,
         RegisterComponent,
         UserComponent,
-        MenuBarComponent
+        MenuBarComponent,
+        ProfileComponent
         ]
 })
 export class ComponentsModule{};

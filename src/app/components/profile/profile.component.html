@@ -1,4 +1,4 @@
-<p>{{user.firstName}}</p>
+<app-menu-bar></app-menu-bar>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -25,14 +25,15 @@ Licensed under MIT
                             {{getFullName()}}
                         </div>
                         <div class="profile-usertitle-job">
-                            Developer
+                            {{user.role}}
                         </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
                     <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-success btn-sm">Follow</button>
-                        <button type="button" class="btn btn-danger btn-sm">Message</button>
+                        <button type="button" class="btn btn-success btn-sm">Editar</button>
+                        <p-button  (click)="delete()" icon="pi pi-check" label="Borrar"></p-button>
+                        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
                     </div>
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->

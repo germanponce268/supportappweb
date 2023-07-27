@@ -9,6 +9,8 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { DialogModule } from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { MessagesModule } from "primeng/messages";
 @NgModule({
     declarations:[],
     imports: [
@@ -21,7 +23,9 @@ import {DropdownModule} from 'primeng/dropdown';
         FileUploadModule,
         DynamicDialogModule,
         DialogModule,
-        DropdownModule
+        DropdownModule,
+        ConfirmDialogModule,
+        MessagesModule
     ],
     exports: [
         InputTextModule,
@@ -33,7 +37,9 @@ import {DropdownModule} from 'primeng/dropdown';
         FileUploadModule,
         DynamicDialogModule,
         DialogModule,
-        DropdownModule 
+        DropdownModule,
+        ConfirmDialogModule ,
+        MessagesModule
     ]
 
 })

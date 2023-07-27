@@ -9,6 +9,8 @@ import {DialogService} from 'primeng/dynamicdialog';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { RoleType } from 'src/app/enum/role-type.enum';
 import { Role } from 'src/app/model/role';
+import { NotificationService } from 'src/app/service/notification.service';
+import { NotificationType } from 'src/app/enum/notification-type.enum';
 
 
 @Component({
@@ -39,7 +41,7 @@ export class UserComponent implements OnInit {
       private userService: UserService, 
       private router: Router,
       private confirmationService: ConfirmationService,
-      private dialogService: DialogService
+      private notificationService: NotificationService
       ) { }
 
     ngOnInit() {
@@ -55,7 +57,7 @@ export class UserComponent implements OnInit {
           {
             label: 'Borrar',
             icon: 'pi pi-fw pi-times', command:
-            () => this.deleteUser(this.selectedUser)
+            () => this.deleteSelectedUser(this.selectedUser)
           }
         ];
 
@@ -72,13 +74,22 @@ export class UserComponent implements OnInit {
           {name: 'Super Admin', code: RoleType.SUPER_ADMIN}
         ];
     }
-  deleteUser(selectedUser: User): void {
-    console.log(selectedUser);
+  deleteSelectedUser(selectedUser: User): void {
     this.confirmationService.confirm({
       message:'Estas seguro de borrar al usuario?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',  
-      accept:()=>console.log("se borro")
+      accept:()=>{
+        this.userService.deleteUser(selectedUser.id)
+                          .subscribe(resp => {
+                            this.sendNotification(NotificationType.SUCCESS, 'Usuario borrado correctamente');
+                            setTimeout(()=>{
+                              location.reload();
+                            },1000)
+                            
+                              
+                          });
+      }
     })
   }
   viewUser(selectedUser: User): void {
@@ -95,15 +106,23 @@ export class UserComponent implements OnInit {
     return this.displayModal = false;
   }
   public onAddUser(formData:  NgForm){
-    console.log(formData.value)
-    console.log(this.addForm.value)
-    console.log(this.selectedRole);
     this.user = this.addForm.value;
     this.user.role = this.selectedRole;
     const data = this.userService.createUserFromData(null,this.user,null);
     this.userService.addUser(data).subscribe((response: User) => {
       this.displayModal = this.hideModal();
       
+      this.sendNotification(NotificationType.SUCCESS, 'Usuario agregado exitosamente');
+      setTimeout(()=>{
+        location.reload();
+      },1000)
     })
+  }
+  private sendNotification(notificationType: NotificationType, message: string): void{
+    if(message){
+        this.notificationService.notify(notificationType, message);
+    }else{
+        this.notificationService.notify(notificationType, 'Ha ocurrido un error, por favor intenta de nuevo')
+    }
   }
 }

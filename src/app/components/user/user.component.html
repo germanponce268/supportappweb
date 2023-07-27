@@ -16,6 +16,7 @@
             <th>Apellido</th>
             <th>Usuario</th>
             <th>Email</th>
+            <th>Rol</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user>
@@ -24,13 +25,14 @@
             <td>{{user.lastName}}</td>
             <td>{{user.username}}</td>
             <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
             <td><img [src]="user.profileImageUrl" [alt]="user.firstName" width="50" class="shadow-4" /></td>
         </tr>
     </ng-template>
 </p-table>
 </div>
-<p-dialog header="Profile" [(visible)]="displayModal"[responsive]="true">
-    <p-dropdown [options]="roles" [(ngModel)]="selectedRole" name='Rol' optionLabel="name" optionValue="code"
+<p-dialog header="Nuevo Usuario" [(visible)]="displayModal"[responsive]="true">
+     <p-dropdown [options]="roles" [(ngModel)]="selectedRole" name='Rol' optionLabel="name" optionValue="code"
         [virtualScroll]="true" [virtualScrollItemSize]="30"></p-dropdown>
                
     <form [formGroup]="addForm" (ngSubmit)="onAddUser(addForm.value)">
@@ -65,3 +67,4 @@
         </div> <!-- form-group// -->                                                                       
     </form>
 </p-dialog>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
