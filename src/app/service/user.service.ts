@@ -50,9 +50,9 @@ export class UserService {
       return null;
   }
 
-  createUserFromData(loggedInUsername : string | null, user : User, profileImage: File | null): FormData {
+  createUserFormData(loggedInUsername : string | null, user : User, profileImage: File | null): FormData {
     const formData = new FormData();
-    formData.append('currentUSername', loggedInUsername!);
+    formData.append('currentUsername', loggedInUsername!);
     formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
     formData.append('username', user.username);
@@ -64,4 +64,5 @@ export class UserService {
     return formData;
 
   }
+  
 }

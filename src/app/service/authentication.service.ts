@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import { Observable, Subscription } from 'rxjs';
 import { User } from '../model/user';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { RoleType } from '../enum/role-type.enum';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +16,14 @@ export class AuthenticationService {
   private jwtHelper : JwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient) {}
+ 
+  public get isAdmin():boolean{
+    return this.getUserRole() === RoleType.ADMIN || this.getUserRole() === RoleType.SUPER_ADMIN;
+  }
+
+  getUserRole():string {
+    return this.getUserFromLocalCache().role;
+  }
 
   login(user: User) : Observable<HttpResponse<any>>{
     return this.http.post<HttpResponse<User>| HttpErrorResponse>(`${this.host}/user/login`, user, {observe : 'response'});

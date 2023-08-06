@@ -19,9 +19,22 @@
           <a class="nav-link" (click)="changeTitle('Herramientas')">Herramientas</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      
+      
+      <form [formGroup]="search" class="form-inline my-2 my-lg-0">
+        <input [placeholder]="placeholder"
+               (keyup.enter)="emitValue(search.get('searchTerm')?.value)"
+               class="form-control mr-sm-2" type="search" formControlName="searchTerm" placeholder="Search" aria-label="Search">
       </form>
+      <div class="logout">
+        <ul>
+          <li>
+            <a (click)="logout()" href="">
+             Salir
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+    
   </nav>

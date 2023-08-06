@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit , OnDestroy{
     }
   }
   onRegister(user: User): void{
-    console.log(user);
     this.showLoading = true;
     this.subscriptions.push(this.authService.register(user)
                         .subscribe((resp : User)=>{

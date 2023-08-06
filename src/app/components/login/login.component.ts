@@ -43,17 +43,14 @@ export class LoginComponent implements OnInit{
     }
     //en el login se guarda el token en cache junto con el usuario
     onLogin(user: User){
-        console.log(user);
        const suscription = this.authService.login(user)
                                             .subscribe((resp:HttpResponse<any>)=>{
                                                 const token = resp.headers.get(HeaderType.JWT_TOKEN);
                                                 this.authService.saveToken(token);
                                                 this.authService.addUserToLocalCache(resp.body);
-                                                console.log(resp.body);
                                                 this.router.navigateByUrl('user/management');
                                                 this.showLoading = false;
        },(errorResponse: HttpErrorResponse)=>{
-        console.log(errorResponse);
         this.sendErrorNotification(NotificationType.ERROR, errorResponse.error.message)
        }) 
         this.showLoading = true;

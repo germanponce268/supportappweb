@@ -1,8 +1,9 @@
-<app-menu-bar></app-menu-bar>
+<app-menu-bar (onDebounce)="searchUser($event)"
+                [users]="users"></app-menu-bar>
 <div class="card">
     <p-toolbar styleClass="mb-4 gap-2">
         <ng-template pTemplate="right">
-            <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success  ml-6" (click)="openNew()"></button>
         </ng-template>
     </p-toolbar>
 <p-contextMenu #cm [model]="items"></p-contextMenu>
@@ -67,4 +68,5 @@
         </div> <!-- form-group// -->                                                                       
     </form>
 </p-dialog>
+
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
