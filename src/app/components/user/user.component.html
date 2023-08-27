@@ -10,7 +10,9 @@
 <div class="table-container">
     <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}"
         [(contextMenuSelection)]="selectedUser"
-        [contextMenu]="cm" dataKey="code">
+        [contextMenu]="cm" dataKey="code"
+        [tableStyle]="{'min-width': '640px'}"
+        [scrollable]="true">
     <ng-template pTemplate="header">
         <tr>
             <th>Nombre</th>

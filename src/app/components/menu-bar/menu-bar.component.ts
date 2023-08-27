@@ -3,7 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, debounceTime } from 'rxjs';
 import { User } from 'src/app/model/user';
-import { AuthenticationService } from 'src/app/service/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -13,24 +14,28 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 export class MenuBarComponent implements OnInit {
   private debouncer: Subject<string> = new Subject<string>();
   public search!: FormGroup;
-  private titleSubject: BehaviorSubject<string> = new BehaviorSubject<string>('Usuarios');
-  public titleAction$: Observable<string> = this.titleSubject.asObservable();
+  public title!: string;
   @Input()
   public users!: User[];
-  
+  public loguedUser! : User;
+  public isAdmin!:boolean;
   public placeholder!: string;
   @Output()
   public onDebounce: EventEmitter<string> = new EventEmitter<string>();
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
-    
-    this.placeholder = 'Buscar por usuario';
-
+    this.isAdmin = this.authenticationService.isAdmin;
+    this.placeholder = 'Buscar usuario';
+    this.title = 'sinEtiqta';
     this.search = new FormGroup({
-      searchTerm: new FormControl<string>('') 
-    })
+      searchTerm: new FormControl<string>('')
+    });
 
+        this.loguedUser = this.authenticationService.getUserFromLocalCache();
+        console.log(this.loguedUser);
+    
+    
     this.debouncer
               .pipe(
               debounceTime(300)
@@ -40,10 +45,6 @@ export class MenuBarComponent implements OnInit {
     })
 
     
-  }
-  public changeTitle(title: string): void{
-    this.titleSubject.next(title);
-   
   }
 
   emitValue(term: string): void{

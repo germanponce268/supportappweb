@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { MessagesModule } from "primeng/messages";
+import {GalleriaModule} from 'primeng/galleria';
 @NgModule({
     declarations:[],
     imports: [
@@ -25,7 +26,8 @@ import { MessagesModule } from "primeng/messages";
         DialogModule,
         DropdownModule,
         ConfirmDialogModule,
-        MessagesModule
+        MessagesModule,
+        GalleriaModule
     ],
     exports: [
         InputTextModule,
@@ -39,7 +41,8 @@ import { MessagesModule } from "primeng/messages";
         DialogModule,
         DropdownModule,
         ConfirmDialogModule ,
-        MessagesModule
+        MessagesModule,
+        GalleriaModule
     ]
 
 })

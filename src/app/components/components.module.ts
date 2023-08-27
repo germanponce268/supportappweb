@@ -9,6 +9,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MainComponent } from './main/main.component';
+import { ProfileSearchedComponent } from './profile-searched/profile-searched.component';
+import { ConfirmationService } from "primeng/api";
 
 
 @NgModule({
@@ -17,7 +20,9 @@ import { ProfileComponent } from './profile/profile.component';
         RegisterComponent,
         UserComponent,
         MenuBarComponent,
-        ProfileComponent
+        ProfileComponent,
+        MainComponent,
+        ProfileSearchedComponent
         ],
     imports:[
         PrimeNgModule,

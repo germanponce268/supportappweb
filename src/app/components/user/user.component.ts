@@ -3,15 +3,15 @@ import { BehaviorSubject, of } from 'rxjs';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/model/user';
-import { UserService } from 'src/app/service/user.service';
+import { UserService } from 'src/app/services/user.service';
 import {Router, RouterLink } from '@angular/router';
 import {DialogService} from 'primeng/dynamicdialog';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { RoleType } from 'src/app/enum/role-type.enum';
 import { Role } from 'src/app/model/role';
-import { NotificationService } from 'src/app/service/notification.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
-import { AuthenticationService } from 'src/app/service/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -150,17 +150,13 @@ export class UserComponent implements OnInit {
                         this.usersListByUsername.set(resp[i].username, resp[i])
                       }
                       const userFound = this.usersListByUsername.get(term);
-                      
                       if(userFound){
                         this.userService.user = userFound;
-                        this.router.navigateByUrl('/profile')
+                        this.router.navigateByUrl('/searched')
                       }else{
                         this.sendNotification(NotificationType.WARNING, 'No existe el usuario buscado');
                       }
-                      
-                      //this.sendUser.emit(userFound);
-                      
-                      console.log(userFound);
+                        console.log(userFound);
                     })
   }
 }

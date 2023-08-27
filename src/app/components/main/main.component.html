@@ -1,0 +1,21 @@
+
+<app-menu-bar (onDebounce)="searchUser($event)"
+                [users]="users"></app-menu-bar>
+<p-galleria [value]="images" 
+            [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{'max-width':'%100'}" 
+            [numVisible]="7"
+            [circular]="true"
+            [showItemNavigators]="true"
+            [showIndicators]="true" 
+            [showItemNavigatorsOnHover]="false"
+            styleClass="dark-photo">
+    <ng-template pTemplate="item" let-item>
+        <img [src]="item.previewImageSrc" [alt]="item.alt" style="width: 80%; display: block;" />
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-item>
+        <div class="grid grid-nogutter justify-content-center">
+            <img [src]="item.thumbnailImageSrc" />
+        </div>
+    </ng-template>
+</p-galleria>

@@ -11,14 +11,13 @@ import { User } from 'src/app/model/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
-
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
-  providers:[MessageService,ConfirmationService]
+  selector: 'app-profile-searched',
+  templateUrl: './profile-searched.component.html',
+  styleUrls: ['./profile-searched.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileSearchedComponent implements OnInit {
+
   public user! : User;
   public image! : string;
   public displayModal :boolean = false;
@@ -29,6 +28,7 @@ export class ProfileComponent implements OnInit {
   public selectedRole!: string; 
   public reset! : FormGroup;
   public isAdmin: boolean = false;
+  public roleLabel!: string;
 
   constructor(
     private userService: UserService,
@@ -40,7 +40,8 @@ export class ProfileComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    this.user = this.authenticationService.getUserFromLocalCache();
+    console.log('ESTAMOS EN EL profile-searched')
+    this.user = this.userService.user;
     this.image = this.user.profileImageUrl;
     this.primengConfig.ripple = false;
     this.isAdmin = this.authenticationService.isAdmin;
@@ -63,10 +64,41 @@ export class ProfileComponent implements OnInit {
 
    
   }
-
-  getFullName(): string{
+  getEmail():string{
+    return `${this.user.email}`
+  }
+  getUserId():string{
+    return `${this.user.userId}`;
+  }
+  getFullName():string{
     return `${this.user.firstName} ${this.user.lastName}`;
   }
+  
+  getUsername(){
+    return `${this.user.username}`;
+  }
+
+  getRole():string{
+    return this.capitalizationRole(this.user.role.toLowerCase());
+  }
+
+  lockedLabel():string{
+    if(this.isUserLocked()){
+      return 'NO';
+    }
+    return 'SI';
+  }
+
+  isUserLocked():boolean{
+    return this.user.notLocked;
+  }
+  capitalizationRole(role: string):string{
+    const words = role.split('_');
+    const word = words.map((word)=>word.charAt(0).toUpperCase() + word.slice(1))
+    console.log(word);
+    return word.join(' ');
+  }
+
   delete():void{
     if(this.authenticationService.isAdmin){
       this.confirmationService.confirm({
@@ -91,7 +123,6 @@ export class ProfileComponent implements OnInit {
     }else{
       this.sendNotification(NotificationType.INFO, "No tienes los permisos para editar al usuario")
     }
-    
   }
   onEditUser(form: NgForm){
     this.currentUsername = this.user.username;
@@ -130,37 +161,5 @@ export class ProfileComponent implements OnInit {
     }else{
         this.notificationService.notify(notificationType, 'Ha ocurrido un error, por favor intenta de nuevo')
     }
-  }
-
-  getEmail():string{
-    return `${this.user.email}`
-  }
-  getUserId():string{
-    return `${this.user.userId}`;
-  }
-  getUsername(){
-    return `${this.user.username}`;
-  }
-
-  getRole():string{
-    return this.capitalizationRole(this.user.role.toLowerCase());
-  }
-
-  capitalizationRole(role: string):string{
-    const words = role.split('_');
-    const word = words.map((word)=>word.charAt(0).toUpperCase() + word.slice(1))
-    console.log(word);
-    return word.join(' ');
-  }
-
-  lockedLabel():string{
-    if(this.isUserLocked()){
-      return 'NO';
-    }
-    return 'SI';
-  }
-
-  isUserLocked():boolean{
-    return this.user.notLocked;
   }
 }

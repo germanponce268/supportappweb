@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
 import { User } from 'src/app/model/user';
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import { NotificationService } from 'src/app/service/notification.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',

@@ -8,7 +8,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
-import { AuthenticationService } from './service/authentication.service';
+import { AuthenticationService } from './services/authentication.service';
 /*se intercepta el request para clonar y agregar el token de authorizacion en en caso
 de que no sea los endpoints de login , registro o cambio de password de usuario */
 @Injectable()
