@@ -1,0 +1,16 @@
+{
+    "data" : [
+        {
+            "previewImageSrc" : "assets/images/image1.png",
+            "thumbnailImageSrc" : "assets/images/image1s.jpg",
+            "alt" : "una simple imagen",
+            "title" : "la imagen"
+        },
+        {
+            "previewImageSrc" : "assets/images/image2.png",
+            "thumbnailImageSrc" : "assets/images/image2s.jpg",
+            "alt" : "una simple imagen2",
+            "title" : "la imagen2"
+        }
+    ]
+}
